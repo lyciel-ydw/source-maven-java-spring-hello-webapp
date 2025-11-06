@@ -14,16 +14,14 @@ pipeline {
       }
     }
     stage('Build') {
-      agent {
+      agent 
         docker { image 'maven:3-openjdk-17' }
-      }
       steps {
         sh 'mvn clean package'
       }
     }
     stage('Image Build') {
-      agent 
-        label 'controller'
+      agent { label 'controller' }
       steps {
         sh 'docker image build -t tomcat:hello .'
       }
@@ -36,9 +34,7 @@ pipeline {
       }
     }
     stage('Depoly') {
-      agent {
-        label 'controller'
-      }
+      agent { label 'controller' }
       steps {
         sh 'docker container run -d -p 80:8080 --name webserver tomcat:hello'
       }
