@@ -22,7 +22,7 @@ pipeline {
       }
     }
     stage('Image Build') {
-      agent {
+      agent 
         label 'controller'
       steps {
         sh 'docker image build -t tomcat:hello .'
@@ -31,7 +31,7 @@ pipeline {
     stage('Image Tag') {
       agent any
       steps {
-        sh 'docker image tag tomcat:hello lyciel1229/tomcat:$BUILDNUMBER'
+        sh 'docker image tag tomcat:hello lyciel1229/tomcat:v1'
         sh 'docker image tag tomcat:hello lyciel1229/tomcat:latest'
       }
     }
